@@ -26,6 +26,13 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+This is a Book app.
+- One can create a Book with a title and content
+- Get a book by its id
+- Get a list of all books
+- Update a book's title or content
+- Delete a book
+
 ## Installation
 
 ```bash
