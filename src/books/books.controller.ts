@@ -9,31 +9,31 @@ export class BooksController {
   constructor(private booksService: BooksService ){}
   
   @Post()
-  async createBook(@Body() book: BooksDto) {
-    return await this.booksService.createBook(book)
+  createBook(@Body() book: BooksDto) {
+    return this.booksService.createBook(book)
   }
 
   @Get()
-  async getBooks() {
-    return await this.booksService.getBooks();
+  getBooks() {
+    return  this.booksService.getBooks();
   }
 
   @Get('/:id')
-  async getBook(@Param('id') id: string) {
-    return await this.booksService.getBook(id);
+  getBook(@Param('id') id: string) {
+    return this.booksService.getBook(id);
   }
 
   @Patch('/:id')
-  async updateBook(
+  updateBook(
     @Param('id') id: string,
     @Body() body: UpdateBookDto
   ) {
-    return await this.booksService.updateBook(id, body);
+    return this.booksService.updateBook(id, body);
   }
 
   @Delete('/:id')
-  async deleteBook (@Param('id') id: string) {
-    return await this.booksService.deleteBook(id);
+  deleteBook (@Param('id') id: string) {
+    return this.booksService.deleteBook(id);
   }
 
 }
