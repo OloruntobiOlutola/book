@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { BooksController } from './books.controller';
 import { BooksService } from './books.service';
 import { BooksDto } from './dto/books.dto';
-import {v4} from 'uuid';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Books } from './entity/books';
 
@@ -66,16 +65,20 @@ describe('BooksController', () => {
 
   it('create a book',  () => {
     const book =  controller.createBook({title: 'foo', content: 'Test'});
-    expect(book).toBeDefined();
-    expect(book.id).toBeDefined();
-    expect(book.title).toEqual('foo');
-    expect(book.content).toEqual('Test');
-
+    expect(book).toEqual({
+      id: 1,
+      title: 'foo',
+      content: 'Test'
+    })
   })
 
   it('findBook return a book with given id', () => {
     const book = controller.getBook('1')
-    expect(book).toBeDefined();
+    expect(book).toEqual({
+      id: 1,
+      title: 'foo',
+      content: 'Content'
+    })
   });
 
   it('findBooks return all the books', () => {
@@ -85,15 +88,15 @@ describe('BooksController', () => {
 
   it('updateBook should update a book with given id', async () => {
     const book = await controller.updateBook('1', {title: 'Hello World'})
-    
-    expect(book).toBeDefined();
-    expect(book.title).toEqual('Hello World');
-    expect(book.content).toEqual('original');
+    expect(book).toEqual({
+      id: 1,
+      title: 'Hello World',
+      content: 'original'
+    })
   })
 
   it ('DeleteBook should delete a book', () => {
-    expect(controller.deleteBook('1'))
-    .toBe(undefined);
+    expect(controller.deleteBook('1')).toBe(undefined);
   })
 
 });

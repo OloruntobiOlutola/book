@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { Books } from './entity/books';
 import { BooksDto } from './dto/books.dto';
 import {v4} from 'uuid';
@@ -21,7 +21,7 @@ export class BooksService {
   }
 
   async getBook(id: string): Promise<Books> {
-    const book = await this._books.find((r) => r.id === id)
+    const book = await this._books.find(book => book.id === id)
     if(!book) {
       throw new HttpException('NotFound', HttpStatus.NOT_FOUND)
     }
@@ -30,7 +30,7 @@ export class BooksService {
   }
 
   async updateBook(id:string, book:UpdateBookDto) {
-    const oldBook = await this._books.find((r) => r.id === id)
+    const oldBook = await this._books.find(book => book.id === id)
     if(!oldBook) {
       throw new HttpException('NotFound', HttpStatus.NOT_FOUND)
     }
@@ -43,7 +43,7 @@ export class BooksService {
   }
 
   deleteBook(id: string) {
-    this._books = this._books.filter((r) => r.id !== id)
+    this._books = this._books.filter(book => book.id !== id)
 
   }
 }
